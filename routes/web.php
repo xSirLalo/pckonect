@@ -17,12 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-if (App::environment('local', 'staging')) {
-    Route::get('/info', function() {
-    return phpinfo();
-});
-}
+// if (App::environment('local', 'staging')) {
+//     Route::get('/info', function() {
+//     return phpinfo();
+// });
+// }
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
