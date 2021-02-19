@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => false,
+    'usermenu_enabled' => true,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -224,28 +224,18 @@ return [
     */
 
     'menu' => [
+        ['header' => 'main_navigation'],
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
+            'text'        => 'Dashboard',
+            'url'         => 'admin',
+            'icon'        => 'nav-icon fas fa-tachometer-alt',
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'administration'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'computers',
+            'url'  => 'admin/computers',
+            'icon'    => 'fas fa-tv',
         ],
         [
             'text' => 'change_password',

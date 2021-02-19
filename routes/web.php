@@ -24,5 +24,8 @@ Route::get('/', function () {
 // }
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/cyber', [App\Http\Controllers\HomeController::class, 'cyber'])->name('cyber');
+Route::get('/cyber/select/{computer}', [App\Http\Controllers\HomeController::class, 'select'])->name('cyber.select');
+Route::post('/cyber', [App\Http\Controllers\CyberControlController::class, 'store'])->name('cyber.store');
 
 Auth::routes();

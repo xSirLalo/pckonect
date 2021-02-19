@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ComputerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 
@@ -14,4 +15,5 @@ use App\Http\Controllers\Admin\HomeController;
 |
 */
 
-Route::get('', [HomeController::class, 'index']);
+Route::get('', [HomeController::class, 'index'])->name('admin.home');
+Route::resource('computers', ComputerController::class)->names('admin.computers');
