@@ -64,9 +64,11 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('cyber') }}">Cyber</a>
-                            </li>
+                            @can('web.cyber.index')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('cyber.index') }}">Cyber</a>
+                                </li>
+                            @endcan
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                             </li>
@@ -102,7 +104,10 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('admin.computers.index') }}"> Dashboard</a>
+                                        @can('admin.home')
+                                            <a class="dropdown-item" href="{{ route('admin.home') }}"> Dashboard</a>
+                                        @endcan
+
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">

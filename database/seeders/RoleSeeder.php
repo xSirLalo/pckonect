@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
@@ -16,5 +17,21 @@ class RoleSeeder extends Seeder
     {
         $role1 = Role::create(['name' => 'Admin']);
         $role2 = Role::create(['name' => 'Client']);
+
+        Permission::create(['name' => 'admin.home'])->assignRole($role1);
+
+        Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+
+        Permission::create(['name' => 'admin.computers.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.computers.create'])->assignRole($role1);
+        Permission::create(['name' => 'admin.computers.edit'])->assignRole($role1);
+        Permission::create(['name' => 'admin.computers.destroy'])->assignRole($role1);
+        Permission::create(['name' => 'admin.computers.show'])->assignRole($role1);
+
+        Permission::create(['name' => 'web.cyber.index'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'web.cyber.store'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'web.cyber.select'])->syncRoles([$role1, $role2]);
+
     }
 }

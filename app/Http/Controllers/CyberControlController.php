@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Computer;
 use App\Models\CyberControl;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CyberControlController extends Controller
@@ -16,15 +18,19 @@ class CyberControlController extends Controller
      */
     public function index()
     {
-        //
+        $computers = Computer::orderBy('number', 'asc')->paginate('5');
+        $checkinput = DB::table('cybercontrols')->where('user_id', Auth::user()->id)->where('status', 1)->first();
+        // \dd($checkinput);
+        return view('cyber.index', compact('computers', 'checkinput'));
     }
+
     public function store(Request $request)
     {
         $search = DB::table('cybercontrols')->where('user_id', $request->user_id)->where('status', 1)->first();
         $checkpc = DB::table('computers')->where('number', $request->number_computer)->where('control', 1)->first();
         if (!$search) {
             if ($checkpc) { // Checar si la computadora esta ocupada
-                return redirect(route("cyber"))->with('danger', 'Computadora ocupada!');
+                return redirect(route("cyber.index"))->with('danger', 'Computadora ocupada!');
             }else{
                 // Registra inicio en bitácora
                 CyberControl::create([
@@ -37,7 +43,7 @@ class CyberControlController extends Controller
                         ->where('control', 0)
                         ->update(['control' => 1])
                 ]);
-                return redirect(route("cyber"))->with('success', 'Welcome to the Black Mesa');
+                return redirect(route("cyber.index"))->with('success', 'Welcome to the Black Mesa');
             }
         }else{
         // Registra fin en bitácora
@@ -53,8 +59,13 @@ class CyberControlController extends Controller
                 ->where('number', $request->number_computer)
                 ->where('control', 1)
                 ->update(['control' => 0]);
-        return redirect(route("cyber"))->with('success', 'Goodbye!');
+        return redirect(route("cyber.index"))->with('success', 'Goodbye!');
         }
+    }
+
+    public function select(Computer $computer)
+    {
+        return view('cyber.select', compact('computer'));
     }
 
     /**

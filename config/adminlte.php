@@ -231,6 +231,12 @@ return [
             'icon'        => 'nav-icon fas fa-tachometer-alt',
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Usuarios',
+            'route'         => 'admin.users.index',
+            'icon'        => 'nav-icon fas fa-users',
+            'label_color' => 'success',
+        ],
         ['header' => 'administration'],
         [
             'text' => 'computers',

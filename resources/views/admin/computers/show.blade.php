@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Detalle Computadora')
 
 @section('content_header')
     <h1>Detalle</h1>

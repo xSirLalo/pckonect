@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class ComputerController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -16,7 +17,11 @@ class ComputerController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware('can:admin.computers.index')->only('index');
+        $this->middleware('can:admin.computers.create')->only('create', 'store');
+        $this->middleware('can:admin.computers.show')->only('show');
+        $this->middleware('can:admin.computers.edit')->only('edit', 'update');
+        $this->middleware('can:admin.computers.destroy')->only('destroy');
     }
 
     /**

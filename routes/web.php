@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +25,9 @@ Route::get('/', function () {
 // }
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/cyber', [App\Http\Controllers\HomeController::class, 'cyber'])->name('cyber');
-Route::get('/cyber/select/{computer}', [App\Http\Controllers\HomeController::class, 'select'])->name('cyber.select');
-Route::post('/cyber', [App\Http\Controllers\CyberControlController::class, 'store'])->name('cyber.store');
+
+Route::get('/cyber', [App\Http\Controllers\CyberControlController::class, 'index'])->middleware('can:web.cyber.index')->name('cyber.index');
+Route::get('/cyber/select/{computer}', [App\Http\Controllers\CyberControlController::class, 'select'])->middleware('can:web.cyber.select')->name('cyber.select');
+Route::post('/cyber', [App\Http\Controllers\CyberControlController::class, 'store'])->middleware('can:web.cyber.store')->name('cyber.store');
 
 Auth::routes();
