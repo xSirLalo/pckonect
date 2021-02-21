@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Yajra\Datatables\Facades\Datatables;
@@ -13,22 +14,66 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('can:admin.users.index')->only('index');
+        $this->middleware('can:admin.users.create')->only('create', 'store');
+        $this->middleware('can:admin.users.show')->only('show');
+        $this->middleware('can:admin.users.edit')->only('edit', 'update');
+        $this->middleware('can:admin.users.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all()->sortByDesc('id');
-        return view('admin.users.index', compact('users'));
+        if ($request->ajax()) {
+            $data = User::all();
+            return Datatables()->of($data)
+                ->addColumn('role', function($user){
+                    $roleBadge='';
+                    if(!empty($user->getRoleNames())):
+                        foreach($user->getRoleNames() as $v):
+                            if ($v == "Admin"):
+                                $roleBadge .= ' <label class="badge badge-danger">'.$v.'</label>';
+                            else:
+                                $roleBadge .= ' <label class="badge badge-success">'.$v.'</label>';
+                            endif;
+                        endforeach;
+                    endif;
+                    return $roleBadge;
+                })
+                ->addColumn('action', function($user){
+                    $actionBtn = '
+                        <div class="btn-group">
+                            <a href="'.route('admin.users.show', $user->id).'" class="btn btn-info">Ver</a>
+                            <a href="'.route('admin.users.edit', $user->id).'" class="btn btn-warning">Modificar</a>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$user->id.'">Eliminar</button>
+                        </div>
+                    ';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action','role'])
+                ->editColumn('created_at', function(User $user) {
+                    return $user->created_at->diffForHumans();
+                })
+                ->only(['id','name', 'last_name', 'email', 'role', 'created_at', 'action'])
+                ->make(true);
+        }else{
+            $users = User::orderBy('id', 'desc')->paginate('5');
+            return view('admin.users.index', compact('users'));
+        }
     }
 
-    public function datatable()
-    {
-        $users = User::select('id', 'name', 'last_name', 'email', 'created_at')->get();
-        return Datatables()->of($users)->toJson();
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -38,8 +83,7 @@ class UserController extends Controller
     {
         $roles = Role::pluck('name','name')->all();
         $user = new User();
-        $userRole = false;
-        return view('admin.users.create', compact('roles', 'user', 'userRole'));
+        return view('admin.users.create', compact('roles', 'user'));
     }
 
     /**
@@ -76,7 +120,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return view('admin.users.show',compact('user'));
     }
 
@@ -88,9 +132,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->first();
+        $userRole = $user->roles->pluck('name','name')->all();
 
         return view('admin.users.edit',compact('user','roles','userRole'));
     }
@@ -117,10 +161,10 @@ class UserController extends Controller
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }else{
-            $input = array_except($input, array('password'));
+            $input = Arr::except($input, array('password'));
         }
 
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
@@ -138,8 +182,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('admin.sers.index')
+        User::findOrFail($id)->delete();
+        return redirect()->route('admin.users.index')
                         ->with('success','User deleted successfully');
     }
 }

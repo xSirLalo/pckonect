@@ -20,8 +20,17 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'admin.home'])->assignRole($role1);
 
+        Permission::create(['name' => 'admin.roles.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.roles.create'])->assignRole($role1);
+        Permission::create(['name' => 'admin.roles.edit'])->assignRole($role1);
+        Permission::create(['name' => 'admin.roles.destroy'])->assignRole($role1);
+        Permission::create(['name' => 'admin.roles.show'])->assignRole($role1);
+
         Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.users.create'])->assignRole($role1);
         Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+        Permission::create(['name' => 'admin.users.destroy'])->assignRole($role1);
+        Permission::create(['name' => 'admin.users.show'])->assignRole($role1);
 
         Permission::create(['name' => 'admin.computers.index'])->assignRole($role1);
         Permission::create(['name' => 'admin.computers.create'])->assignRole($role1);

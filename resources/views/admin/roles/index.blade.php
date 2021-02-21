@@ -1,48 +1,38 @@
 @extends('adminlte::page')
 
-@section('title', 'Computadoras')
+@section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Computadoras</h1>
+    <h1>Rols</h1>
 @stop
 
 @section('content')
 @include('layouts.partials.flash-message')
 <div class="card">
     <div class="card-body">
-        <p class="cart-text">Debajo esta la lista de computadoras.</p>
         <div class="row">
             <div class="col">
-                <a href="{{ route('admin.computers.create') }}" class="btn btn-primary">Agregar computadora</a>
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-secondary btn-sm float-right">Agregar rol</a>
             </div>
         </div>
+        <p class="cart-text">Debajo esta la lista de rols.</p>
         <hr class="my-4">
-        <table class="table table-bordered">
+        <table class="table table-striped table-bordered nowrap">
             <thead class="thead-dark">
                 <tr>
-                    <th>#</th>
-                    <th>Procesador</th>
-                    <th>RAM</th>
-                    <th>Almacenamiento</th>
-                    <th>Dirección IP</th>
-                    <th>Número PC</th>
-                    <th>Opciones</th>
+                    <th>Nombre</th>
+                    <th width="280px">Opciones</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($computers as $computer)
+                @forelse ($roles as $role)
                     <tr>
-                        <td>{{ $computer->id }}</td>
-                        <td>{{ $computer->processor }}</td>
-                        <td>{{ $computer->ram }}</td>
-                        <td>{{ $computer->storage }}</td>
-                        <td>{{ $computer->ip_address }}</td>
-                        <td>{{ $computer->number }}</td>
+                        <td>{{ $role->name }}</td>
                         <td>
-                            <div class="btn-group flex-wrap">
-                                <a href="{{ route('admin.computers.show', $computer->id) }}" class="btn btn-info">Ver</a>
-                                <a href="{{ route('admin.computers.edit', $computer->id) }}" class="btn btn-warning">Modificar</a>
-                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $computer->id }}">Eliminar</button>
+                            <div class="btn-group">
+                                <a href="{{ route('admin.roles.show', $role->id) }}" class="btn btn-info">Ver</a>
+                                <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-warning">Modificar</a>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $role->id }}">Eliminar</button>
                             </div>
                         </td>
                     </tr>
@@ -53,7 +43,9 @@
                 @endforelse
             </tbody>
         </table>
-        {{ $computers->links() }}
+        <div class="float-right" id="lv-links">
+            {{ $roles->links() }}
+        </div>
     </div>
 </div>
 
@@ -73,7 +65,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <form id="formDelete" action="{{ route('admin.computers.destroy', 0) }}" data-action="{{ route('admin.computers.destroy', 0) }}" method="POST">
+                <form id="formDelete" action="{{ route('admin.roles.destroy', 0) }}" data-action="{{ route('admin.roles.destroy', 0) }}" method="POST">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-danger">Confirmar</button>
@@ -82,10 +74,11 @@
         </div>
     </div>
 </div>
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
@@ -107,5 +100,14 @@
             modal.find('.modal-title').text('Eliminar')
         })
     }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // show the alert
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 5000);
+        });
     </script>
 @stop

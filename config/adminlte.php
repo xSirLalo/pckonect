@@ -237,6 +237,12 @@ return [
             'icon'        => 'nav-icon fas fa-users',
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Roles',
+            'route'         => 'admin.roles.index',
+            'icon'        => 'nav-icon fas fa-user-tag',
+            'label_color' => 'success',
+        ],
         ['header' => 'administration'],
         [
             'text' => 'computers',

@@ -44,9 +44,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Relación de un usuario tiene un rol
-     *
-     * @return void
-     */
 }

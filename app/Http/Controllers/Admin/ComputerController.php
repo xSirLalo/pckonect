@@ -54,7 +54,7 @@ class ComputerController extends Controller
     public function store(ComputerRequest $request)
     {
         Computer::create($request->validated());
-        return redirect(route("admin.computers.index"))->with('status', 'Se guardo con éxito!');
+        return redirect(route("admin.computers.index"))->with('info', 'Se guardo con éxito!');
     }
 
     /**
@@ -89,7 +89,7 @@ class ComputerController extends Controller
     public function update(ComputerRequest $request, Computer $computer)
     {
         $computer->update($request->validated());
-        return redirect(route("admin.computers.index"))->with('status', 'Se actualizo con éxito!');
+        return redirect(route("admin.computers.index"))->with('success', 'Se actualizo con éxito!');
     }
 
     /**
@@ -101,6 +101,6 @@ class ComputerController extends Controller
     public function destroy(Computer $computer)
     {
         $computer->delete();
-        return back()->with('status', 'Se elimino con éxito!');
+        return back()->with('success', 'Se elimino con éxito!');
     }
 }

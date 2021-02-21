@@ -127,6 +127,8 @@
         </header>
 
         <main role="main" class="flex-shrink-0 py-4">
+            @include('layouts.partials.flash-message')
+
             @yield('content')
         </main>
 
