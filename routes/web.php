@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 // if (App::environment('local', 'staging')) {
@@ -27,6 +27,6 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/cyber', [App\Http\Controllers\CyberControlController::class, 'index'])->middleware('can:web.cyber.index')->name('cyber.index');
 Route::get('/cyber/select/{computer}', [App\Http\Controllers\CyberControlController::class, 'select'])->middleware('can:web.cyber.select')->name('cyber.select');
-Route::get('/cyber/cgi-bin/socket.cgi', function(){ exec('cgi-bin/socket.cgi'); })->name('cyber.socket');
+Route::get('/cyber/cgi-bin/socket.cgi', function () { exec('cgi-bin/socket.cgi'); })->name('cyber.socket');
 Route::post('/cyber', [App\Http\Controllers\CyberControlController::class, 'store'])->middleware('can:web.cyber.store')->name('cyber.store');
 Auth::routes();

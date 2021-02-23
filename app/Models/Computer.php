@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Computer extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $fillable = ['processor', 'ram', 'storage', 'ip_address', 'number'];
+	protected $fillable = ['processor', 'ram', 'storage', 'ip_address', 'number'];
 }

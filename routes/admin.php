@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ComputerController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CyberControlController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +21,8 @@ use App\Http\Controllers\CyberControlController;
 Route::get('', [HomeController::class, 'index'])->middleware('can:admin.home')->name('admin.home');
 Route::get('/bitacora', [CyberControlController::class, 'bitacora'])->middleware('can:admin.bitacora')->name('admin.bitacora');
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('/roles', RoleController::class)->names('admin.roles');
-    Route::resource('/users', UserController::class)->names('admin.users');
-    Route::resource('/computers', ComputerController::class)->names('admin.computers');
+Route::group(['middleware' => ['auth']], function () {
+	Route::resource('/roles', RoleController::class)->names('admin.roles');
+	Route::resource('/users', UserController::class)->names('admin.users');
+	Route::resource('/computers', ComputerController::class)->names('admin.computers');
 });
-

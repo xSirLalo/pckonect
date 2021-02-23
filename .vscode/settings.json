@@ -16,5 +16,8 @@
         "titleBar.inactiveForeground": "#e7e7e799"
     },
     "peacock.color": "#1857a4",
-    "intelephense.diagnostics.undefinedTypes": false
+    "intelephense.diagnostics.undefinedTypes": false,
+    "prettier.tabWidth": 4,
+    "php-cs-fixer.executablePath": "C:\\laragon\\www\\pckonect\\vendor\\bin\\php-cs-fixer.bat",
+    "prettier.configPath": ".prettierrc"
 }
