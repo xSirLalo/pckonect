@@ -44,4 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Relacion uno a muchos
+    public function cybercontrols()
+    {
+        return $this->hasMany(CyberControl::class);
+    }
 }

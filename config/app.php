@@ -56,6 +56,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'perl_url' => 'cgi-bin/socket.cgi',
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -67,7 +69,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Cancun',
+    // 'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------

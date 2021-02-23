@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Rols')
 
 @section('content_header')
     <h1>Rols</h1>
@@ -37,7 +37,7 @@
                         </td>
                     </tr>
                 @empty
-                    <tr>
+                    <tr class="text-center">
                         <td colspan="7">No hay datos...</td>
                     </tr>
                 @endforelse

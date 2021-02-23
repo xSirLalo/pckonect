@@ -11,5 +11,17 @@ class CyberControl extends Model
 
     protected $table = 'cybercontrols';
 
-    protected $fillable = ['user_id', 'number_computer', 'status'];
+    protected $fillable = ['user_id', 'computer_id', 'status'];
+
+    // Relacion uno a muchos inversa
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function computer()
+    {
+        return $this->belongsTo(Computer::class);
+    }
 }
+

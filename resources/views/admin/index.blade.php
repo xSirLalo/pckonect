@@ -7,16 +7,18 @@
 @stop
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        Header
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">Title</h5>
-        <p class="card-text">Welcome to this beautiful admin panel.</p>
-    </div>
-    <div class="card-footer">
-        Footer
+<div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-info">
+        <div class="inner">
+        <h3>{{ $users }}</h3>
+
+        <p>Usuarios Registrados</p>
+        </div>
+        <div class="icon">
+        <i class="fa fa-user-plus"></i>
+        </div>
+        <a href="{{ route('admin.users.index') }}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
 </div>
 @stop

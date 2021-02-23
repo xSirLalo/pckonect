@@ -19,31 +19,34 @@ class CyberControlController extends Controller
     public function index()
     {
         $computers = Computer::orderBy('number', 'asc')->paginate('5');
-        $checkinput = DB::table('cybercontrols')->where('user_id', Auth::user()->id)->where('status', 1)->first();
+        $checkstatus = DB::table('cybercontrols')->where('user_id', Auth::user()->id)->where('status', 1)->first();
         // \dd($checkinput);
-        return view('cyber.index', compact('computers', 'checkinput'));
+        return view('cyber.index', compact('computers', 'checkstatus'));
     }
 
     public function store(Request $request)
     {
         $search = DB::table('cybercontrols')->where('user_id', $request->user_id)->where('status', 1)->first();
-        $checkpc = DB::table('computers')->where('number', $request->number_computer)->where('control', 1)->first();
+        $checkcontrol = DB::table('computers')->where('id', $request->computer_id)->where('control', 1)->first();
         if (!$search) {
-            if ($checkpc) { // Checar si la computadora esta ocupada
+            if ($checkcontrol) { // Checar si la computadora esta ocupada
                 return redirect(route("cyber.index"))->with('danger', 'Computadora ocupada!');
             }else{
                 // Registra inicio en bitácora
                 CyberControl::create([
                     'user_id' => $request->user_id,
-                    'number_computer' => $request->number_computer,
+                    'computer_id' => $request->computer_id,
                     'status' => 1,
                 // Inicia control computadora
                 DB::table('computers')
-                        ->where('number', $request->number_computer)
+                        ->where('id', $request->computer_id)
                         ->where('control', 0)
                         ->update(['control' => 1])
                 ]);
-                return redirect(route("cyber.index"))->with('success', 'Welcome to the Black Mesa');
+                $socketCGI = config('app.perl_url').'?pc='.$request->number_computer.'&acc=1';
+                // \dd($socketCGI);
+                return redirect($socketCGI)->with('success', 'Welcome to the Black Mesa');
+                // return redirect(route("cyber.index"))->with('success', 'Welcome to the Black Mesa');
             }
         }else{
         // Registra fin en bitácora
@@ -56,16 +59,25 @@ class CyberControlController extends Controller
                     ]);
         // Finaliza control computadora
         DB::table('computers')
-                ->where('number', $request->number_computer)
+                ->where('id', $request->computer_id)
                 ->where('control', 1)
                 ->update(['control' => 0]);
-        return redirect(route("cyber.index"))->with('success', 'Goodbye!');
+        $socketCGI = config('app.perl_url').'?pc='.$request->number_computer.'&acc=0';
+        // \dd($socketCGI);
+        return redirect($socketCGI)->with('success', 'Goodbye!');
+        // return redirect(route("cyber.index"))->with('success', 'Goodbye!');
         }
     }
 
     public function select(Computer $computer)
     {
         return view('cyber.select', compact('computer'));
+    }
+
+    public function bitacora()
+    {
+        $cybercontrols = CyberControl::orderBy('id', 'desc')->paginate('5');
+        return view('admin.bitacora.index', compact('cybercontrols'));
     }
 
     /**

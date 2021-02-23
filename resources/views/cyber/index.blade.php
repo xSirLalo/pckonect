@@ -17,6 +17,8 @@
 </style>
 <div class="container">
     <div class="jumbotron jumbotron-fluid">
+        {{-- <a href="{{ config('app.perl_url')}}?pc=1&acc=1">link text</a> --}}
+        {{-- <a href="{{ config('app.perl_url')}}?pc=1&acc=0">link text</a> --}}
         <div class="container text-center">
             @forelse ($computers as $computer)
                 <div class="contenedor">
@@ -24,7 +26,7 @@
                     <div class="centrado">
                         <h1 class="display-4 @if ($computer->control == 0) text-primary @else text-danger @endif">
                             @if ($computer->control == 0)
-                                @if (!$checkinput)
+                                @if (!$checkstatus)
                                     {{-- Puedes seleccionar cualquiera que este libre. --}}
                                     <a href="{{ route('cyber.select', $computer->id) }}" style="text-decoration: none">{{ $computer->number }}</a>
                                 @else
@@ -32,8 +34,8 @@
                                     {{ $computer->number }}
                                 @endif
                             @else
-                                @if ($checkinput)
-                                    @if ($checkinput->number_computer == $computer->number)
+                                @if ($checkstatus)
+                                    @if ($checkstatus->computer_id == $computer->id)
                                         {{-- Solo puedes seleccionar la que estas ocupando. --}}
                                         <a href="{{ route('cyber.select', $computer->id) }}" style="text-decoration: none">
                                             <div class="text-success">

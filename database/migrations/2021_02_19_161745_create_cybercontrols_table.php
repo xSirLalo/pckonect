@@ -16,9 +16,9 @@ class CreateCybercontrolsTable extends Migration
         Schema::create('cybercontrols', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('computer_id');
             $table->foreign("user_id")->references("id")->on("users");
-            $table->unsignedSmallInteger('number_computer');
-            // $table->foreign("number_computer")->references("number")->on("computers");
+            $table->foreign("computer_id")->references("id")->on("computers");
             $table->smallInteger('status');
             $table->timestamps();
         });

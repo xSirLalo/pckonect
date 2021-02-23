@@ -250,9 +250,9 @@ return [
             'icon'    => 'fas fa-tv',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Bitacora',
+            'url'  => 'admin/bitacora',
+            'icon'    => 'fas fa-list-alt',
         ],
         [
             'text'    => 'multilevel',
