@@ -1,6 +1,4 @@
 @extends('layouts.app')
-
-@section('content')
 <style>
     .contenedor {
         position: relative;
@@ -15,6 +13,8 @@
         transform: translate(-50%, -50%);
     }
 </style>
+@section('content')
+
 <div class="container">
     <div class="jumbotron jumbotron-fluid">
         {{-- <a href="{{ config('app.perl_url')}}?pc=1&acc=1">link text</a> --}}
@@ -26,12 +26,12 @@
                     <div class="centrado">
                         <h1 class="display-4 @if ($computer->control == 0) text-primary @else text-danger @endif">
                             @if ($computer->control == 0)
-                                @if (!$checkstatus)
-                                    {{-- Puedes seleccionar cualquiera que este libre. --}}
-                                    <a href="{{ route('cyber.select', $computer->id) }}" style="text-decoration: none">{{ $computer->number }}</a>
-                                @else
+                                @if ($checkstatus)
                                     {{-- No puedes seleccionanar ninguna libre. --}}
                                     {{ $computer->number }}
+                                @else
+                                    {{-- Puedes seleccionar cualquiera que este libre. --}}
+                                    <a href="{{ route('cyber.select', $computer->id) }}" style="text-decoration: none">{{ $computer->number }}</a>
                                 @endif
                             @else
                                 @if ($checkstatus)

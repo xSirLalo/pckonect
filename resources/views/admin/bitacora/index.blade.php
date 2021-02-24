@@ -20,7 +20,6 @@
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>#</th>
                     <th>Usuario</th>
                     <th>PC</th>
                     <th>Estatus</th>
@@ -33,7 +32,6 @@
             <tbody>
                 @forelse ($cybercontrols as $cybercontrol)
                     <tr>
-                        <td>{{ $cybercontrol->id }}</td>
                         <td>{{ $cybercontrol->user->name .' '.  $cybercontrol->user->last_name }}</td>
                         <td>{{ $cybercontrol->computer->number }}</td>
                         <td>{{ $cybercontrol->status }}</td>

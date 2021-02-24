@@ -17,7 +17,7 @@ class CreateCybercontrolsTable extends Migration
 			$table->id();
 			$table->unsignedBigInteger('user_id');
 			$table->unsignedBigInteger('computer_id');
-			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->foreign('computer_id')->references('id')->on('computers');
 			$table->smallInteger('status');
 			$table->timestamps();

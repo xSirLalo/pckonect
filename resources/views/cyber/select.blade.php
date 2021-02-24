@@ -41,9 +41,9 @@
             <form action="{{ route('cyber.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <input id="user_id" class="form-control" type="hidden" name="user_id" value="{{ Auth::user()->id }}" readonly>
-                    <input id="computer_id" class="form-control" type="hidden" name="computer_id" value="{{ old('id', $computer->id) }}" readonly>
-                    <input id="number_computer" class="form-control" type="hidden" name="number_computer" value="{{ old('number', $computer->number) }}" readonly>
+                    <input id="user_id" class="form-control" type="hidden" title="user_id" name="user_id" value="{{ Auth::user()->id }}" readonly>
+                    <input id="computer_id" class="form-control" type="hidden" title="cumputer_id" name="computer_id" value="{{ old('id', $computer->id) }}" readonly>
+                    <input id="number_computer" class="form-control" type="hidden" title="number_computer" name="number_computer" value="{{ old('number', $computer->number) }}" readonly>
                 </div>
                 <button class="btn btn-lg btn-block btn-{{ $color }}" type="submit"> {{ $btnName }}</button>
             </form>

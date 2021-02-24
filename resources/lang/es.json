@@ -30,5 +30,13 @@
     "Before proceeding, please check your email for a verification link.": "Antes de poder continuar, por favor, confirma tu correo electrónico con el enlace que te hemos enviado.",
     "If you did not receive the email": "Si no has recibido el email",
     "click here to request another": "pulsa aquí para que te enviemos otro",
-    "All rights reserved.":  "Todos los derechos reservados."
+    "All rights reserved.":  "Todos los derechos reservados.",
+    "Unauthorized": "No autorizado",
+    "Forbidden": "Prohibido",
+    "Not Found": "No encontrado",
+    "Page Expired": "Pagina expirada",
+    "Too Many Requests": "Demasiadas solicitudes",
+    "Server Error": "Error del Servidor",
+    "Service Unavailable": "Servicio No Disponible",
+    "This action is unauthorized.": "Esta Acción No Está Autorizada."
 }

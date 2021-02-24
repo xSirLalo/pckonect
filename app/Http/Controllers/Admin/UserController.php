@@ -182,11 +182,21 @@ class UserController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(User $user)
 	{
-		User::findOrFail($id)->delete();
+		if ($user->id == \Auth::id()) {
+			return redirect()->route('admin.users.index')
+							->with('error', 'You cannot delete yourself');
+		}
+		if ($user->id != 1) {
+			User::findOrFail($user->id)->delete();
 
-		return redirect()->route('admin.users.index')
-						->with('success', 'User deleted successfully');
+			return redirect()->route('admin.users.index')
+									->with('success', 'User deleted successfully');
+		}
+		if (\Auth::user()->hasRole('Admin')) {
+			return redirect()->route('admin.users.index')
+							->with('error', 'You cannot delete Admin');
+		}
 	}
 }
