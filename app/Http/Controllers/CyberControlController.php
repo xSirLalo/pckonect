@@ -45,8 +45,9 @@ class CyberControlController extends Controller
 							->update(['control' => 1]),
 				]);
 				$socketCGI = config('app.perl_url') . '?pc=' . $request->number_computer . '&acc=1';
-				// return redirect($socketCGI)->with('success', 'Welcome to the Black Mesa');
-				return redirect(route('cyber.index'))->with('success', 'Welcome to the Black Mesa');
+
+				return redirect($socketCGI)->with('success', 'Welcome to the Black Mesa');
+				// return redirect(route('cyber.index'))->with('success', 'Welcome to the Black Mesa');
 			}
 		} else {
 			if ($checkstatus) { // Checa en bitacora si esta siendo ocupada
@@ -65,8 +66,9 @@ class CyberControlController extends Controller
 						->where('control', 1)
 						->update(['control' => 0]);
 					$socketCGI = config('app.perl_url') . '?pc=' . $request->number_computer . '&acc=0';
-					// return redirect($socketCGI)->with('success', 'Goodbye!');
-					return redirect(route('cyber.index'))->with('success', 'Goodbye!');
+
+					return redirect($socketCGI)->with('success', 'Goodbye!');
+				// return redirect(route('cyber.index'))->with('success', 'Goodbye!');
 				} else {
 					return redirect(route('cyber.index'))->with('error', 'Computadora ocupada3!');
 				}

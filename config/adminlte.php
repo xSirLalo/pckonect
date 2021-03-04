@@ -230,10 +230,11 @@ return [
 			'icon' => 'nav-icon fas fa-tachometer-alt',
 			'label_color' => 'success',
 		],
+		['header' => 'administration'],
 		[
 			'text' => 'Usuarios',
 			'route' => 'admin.users.index',
-			'icon' => 'nav-icon fas fa-users',
+			'icon' => 'nav-icon fas fa-user-friends',
 			'label_color' => 'success',
 		],
 		[
@@ -242,7 +243,7 @@ return [
 			'icon' => 'nav-icon fas fa-user-tag',
 			'label_color' => 'success',
 		],
-		['header' => 'administration'],
+		['header' => 'cyber'],
 		[
 			'text' => 'computers',
 			'url' => 'admin/computers',
@@ -253,6 +254,7 @@ return [
 			'url' => 'admin/bitacora',
 			'icon' => 'fas fa-list-alt',
 		],
+
 		[
 			'text' => 'multilevel',
 			'icon' => 'fas fa-fw fa-share',
@@ -290,6 +292,32 @@ return [
 					'url' => '#',
 				],
 			],
+		],
+		['header' => 'shop'],
+		[
+			'text' => 'products',
+			'icon' => 'fa fa-box',
+			'route' => 'admin.products.index',
+		],
+		[
+			'text' => 'categories',
+			'icon' => 'fas fa-circle',
+			'route' => 'admin.categories.index',
+		],
+		[
+			'text' => 'sell',
+			'icon' => 'fa fa-cart-plus',
+			'url' => '#',
+		],
+		[
+			'text' => 'sales',
+			'icon' => 'fa fa-list',
+			'url' => '#',
+		],
+		[
+			'text' => 'clients',
+			'icon' => 'fas fa-users',
+			'url' => '#',
 		],
 		['header' => 'labels'],
 		[

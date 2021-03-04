@@ -1,13 +1,28 @@
-#!"C:\laragon\bin\git\usr\bin\perl.exe" -w -T
+#!/usr/bin/perl -w
 # Por: Ing. Eduardo Cauich Herrera.
 use strict;
 use warnings;
-
-# use CGI qw(-utf8);
+use CGI qw(-unique_headers);
+use CGI::Carp qw(fatalsToBrowser);
 use IO::Socket;
-# print CGI::header();
-print "Content-Type: text/html;charset=UTF-8\n\n";
+my $q = CGI->new;
+print $q->header(-type => "text/html", -charset => 'utf8');
 
+print $q->header();
+print '<head><title>Socket - CGI</title></head>';
+print "<style>
+.texto-centrado {
+        left: 0;
+        line-height: 200px;
+        margin-top: -100px;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        width: 100%;
+}</style>";
+print $q->header();
+
+print $q->start_html();
 # Test link. http://cgi-bin.test/socket.cgi?pc=1&acc=1
 # my $parametros="http://pckonect.test/cyber/cgi-bin/socket.cgi?pc=1&acc=1";
 # Obtiene las variables del enlace.
@@ -19,39 +34,31 @@ my @PC = split(/=/, $pares[0]);
 my @ACC = split(/=/, $pares[1]);
 
 # Conexion al Socket de Java donde se encuentre iniciado.
-my $host = "192.168.1.2";
-my $port = 3519;
+my $url = "http://pckonect.test/cyber";
+my $host_remote = "192.168.1.2";
+my $port_remote = 3519;
 my $sock = IO::Socket::INET->new(
-	PeerAddr => $host,
-	PeerPort => $port,
-	Proto    => "tcp",
-	Timeout  =>  10,
-) || die "Failure: $!";
-# ) or die print "Location: http://pckonect.test/cyber/errorSocket\n\n";
-
+    PeerAddr => $host_remote,
+    PeerPort => $port_remote,
+    Proto    => "tcp",
+    Type => SOCK_STREAM,
+    Reuse => 1,
+    Timeout  => 1,
+) or die "Couldn't connect to $host_remote:$port_remote : $!\n\n";
 my $command.="OS1--".$PC[1]."--".$ACC[1]."--OS1";
 print $sock $command;
-close $sock or die "Can't close socket: $!";
+print "<meta http-equiv=refresh content=\"0;URL=http://192.168.1.100/cyber\">\n";
 
-# print "Location: http://pckonect.test/cyber\n\n";
-# DEBUG "Imprimir variables y comportamiento del mensaje"
-# print "Content-Type: text/html\n\n";
-# print "RECIBE:\n";
-# print "$parametros\n\n";
+#my %headers = map { $_ => $q->http($_) } $q->http();
+#print "Got the following headers:\n";
+#for my $header ( keys %headers ) {
+#print "<p>";
+#    print "$header: $headers{$header}\n";
+#print "</p>";
+#}
 
-# print "SEPARA:\n";
-# print "PC  = $PC[1]\n";
-# print "ACC = $ACC[1]\n\n";
-
-# print "ENVIA:\n";
-print '<pre style="
-	left: 0;
-    line-height: 200px;
-    margin-top: -100px;
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    width: 100%;">';
+print '<pre class="texto-centrado" >';
 print "$command";
 print "</pre>";
 
+print $q->end_html();
