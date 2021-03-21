@@ -10,17 +10,16 @@
 @include('layouts.partials.flash-message')
 <div class="card">
     <div class="card-body">
-        <p class="cart-text">Debajo esta la lista de computadoras.</p>
         <div class="row">
             <div class="col">
-                <a href="{{ route('admin.computers.create') }}" class="btn btn-primary">Agregar computadora</a>
+                <a href="{{ route('admin.computers.create') }}" class="btn btn-secondary btn-sm float-right">Agregar computadora</a>
             </div>
         </div>
+        <p class="cart-text">Debajo esta la lista de computadoras.</p>
         <hr class="my-4">
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>#</th>
                     <th>Procesador</th>
                     <th>RAM</th>
                     <th>Almacenamiento</th>
@@ -32,7 +31,6 @@
             <tbody>
                 @forelse ($computers as $computer)
                     <tr>
-                        <td>{{ $computer->id }}</td>
                         <td>{{ $computer->processor }}</td>
                         <td>{{ $computer->ram }}</td>
                         <td>{{ $computer->storage }}</td>

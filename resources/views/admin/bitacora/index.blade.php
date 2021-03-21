@@ -10,12 +10,12 @@
 @include('layouts.partials.flash-message')
 <div class="card">
     <div class="card-body">
-        <p class="cart-text">Debajo esta la lista de entradas y salidas.</p>
         <div class="row">
             <div class="col">
-                {{-- <a href="{{ route('admin.computers.create') }}" class="btn btn-primary">Agregar computadora</a> --}}
+                <a href="{{ route('admin.computers.create') }}" class="btn btn-secondary btn-sm float-right">Agregar computadora</a>
             </div>
         </div>
+        <p class="cart-text">Debajo esta la lista de entradas y salidas.</p>
         <hr class="my-4">
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -58,19 +58,15 @@
                                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                                if (days<=9)
-                                    days="0"+days
-                                if (hours<=9)
-                                    hours="0"+hours
-                                if (minutes<=9)
-                                    minutes="0"+minutes
-                                if (seconds<=9)
-                                    seconds="0"+seconds
-                                document.getElementById("realtime-{!!$cybercontrol->id!!}").innerHTML ='<div class="text-info">' + days + "d " + hours + "h "  + minutes + "m " + seconds + "s" + '</div>';
-                                if (status == {!!$cybercontrol->status!!}) {
-                                    clearInterval(x + 1);
-                                    document.getElementById("realtime-{!!$cybercontrol->id!!}").innerHTML = '<div class="text-success">' + "Finalizado" + '</div>';
-                                }
+                                    if (days <= 9) days = "0" + days
+                                    if (hours <= 9) hours = "0" + hours
+                                    if (minutes <= 9) minutes = "0" + minutes
+                                    if (seconds <= 9) seconds = "0" + seconds
+                                        document.getElementById("realtime-{!!$cybercontrol->id!!}").innerHTML ='<div class="text-info">' + days + "d " + hours + "h "  + minutes + "m " + seconds + "s" + '</div>';
+                                    if (status == {!!$cybercontrol->status!!}) {
+                                        clearInterval(x + 1);
+                                        document.getElementById("realtime-{!!$cybercontrol->id!!}").innerHTML = '<div class="text-success">' + "Finalizado" + '</div>';
+                                    }
                                 }, 1000);
                             </script>
                         <td>{{ $cybercontrol->updated_at }}</td>

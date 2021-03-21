@@ -21,7 +21,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th>Codigo de Barra</th>
+                    <th>SKU</th>
                     <th>Nombre</th>
                     <th>Precio de compra</th>
                     <th>Precio al publico</th>

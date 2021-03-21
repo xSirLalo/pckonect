@@ -20,7 +20,6 @@
         <table class="table table-striped table-bordered nowrap" id="usuarios">
             <thead class="thead-dark">
                 <tr>
-                    <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Correo</th>
@@ -32,7 +31,6 @@
             <tbody>
                 @forelse ($users as $user)
                     <tr>
-                        <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->last_name }}</td>
                         <td>{{ $user->email }}</td>
@@ -109,8 +107,9 @@
     <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
     <script>
+        // FIXME: Reparar busqueda
         $(document).ready(function() {
-            $('#usuarios').DataTable({
+            $('#usuarioss').DataTable({
                 order: [ 0, 'desc' ],
                 // responsive: true,
                 scrollX: true,
@@ -139,17 +138,6 @@
                 ],
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.10.6/i18n/Spanish.json"
-                    // "lengthMenu": "Mostrar _MENU_ registros por página",
-                    // "zeroRecords": "Nada encontrado - disculpa.",
-                    // "info": "Mostrando la página _PAGE_ de _PAGES_",
-                    // "infoEmpty": "No hay datos...",
-                    // "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    // "search": "Buscar:",
-                    // "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
-                    // "paginate":{
-                    //     'next': 'Siguiente',
-                    //     'previous': 'Anterior',
-                    // },
                 },
             });
         });
