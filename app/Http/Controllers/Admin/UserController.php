@@ -68,6 +68,7 @@ class UserController extends Controller
 				})
 				->only(['id', 'name', 'last_name', 'email', 'role', 'created_at', 'action'])
 				->make(true);
+			exit();
 		} else {
 			$users = User::orderBy('id', 'desc')->paginate('5');
 
