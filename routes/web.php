@@ -32,7 +32,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/cyber', [App\Http\Controllers\CyberControlController::class, 'index'])->middleware('can:web.cyber.index')->name('cyber.index');
 Route::get('/cyber/select/{computer}', [App\Http\Controllers\CyberControlController::class, 'select'])->middleware('can:web.cyber.select')->name('cyber.select');
-Route::get('/cgi-bin/socket.cgi', function () { exec('cgi-bin/socket.cgi'); })->name('cyber.socket');
+//Route::get('/cgi-bin/socket.cgi', function () { exec('cgi-bin/socket.cgi'); })->name('cyber.socket');
 Route::post('/cyber', [App\Http\Controllers\CyberControlController::class, 'store'])->middleware('can:web.cyber.store')->name('cyber.store');
 
 Auth::routes();

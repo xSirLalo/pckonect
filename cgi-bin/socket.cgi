@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!"C:\laragon\bin\git\usr\bin\perl.exe" -w -T
 # Por: Ing. Eduardo Cauich Herrera.
 use strict;
 use warnings;
@@ -35,7 +35,7 @@ my @ACC = split(/=/, $pares[1]);
 
 # Conexion al Socket de Java donde se encuentre iniciado.
 my $url = "http://pckonect.test/cyber";
-my $host_remote = "192.168.1.2";
+my $host_remote = "192.168.100.123";
 my $port_remote = 3519;
 my $sock = IO::Socket::INET->new(
     PeerAddr => $host_remote,
@@ -47,7 +47,7 @@ my $sock = IO::Socket::INET->new(
 ) or die "Couldn't connect to $host_remote:$port_remote : $!\n\n";
 my $command.="OS1--".$PC[1]."--".$ACC[1]."--OS1";
 print $sock $command;
-print "<meta http-equiv=refresh content=\"0;URL=http://192.168.1.100/cyber\">\n";
+print "<meta http-equiv=refresh content=\"0;URL=http://pckonect.test/cyber\">\n";
 
 #my %headers = map { $_ => $q->http($_) } $q->http();
 #print "Got the following headers:\n";

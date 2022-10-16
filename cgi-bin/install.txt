@@ -1,0 +1,8 @@
+#!"C:\laragon\bin\git\usr\bin\perl.exe" -w -T
+
+#!"C:\xampp\perl\bin\perl.exe" -w -T
+
+#!/usr/bin/perl -w
+
+C:\laragon\bin\apache\httpd-2.4.47-win64-VS16\cgi-bin
+
